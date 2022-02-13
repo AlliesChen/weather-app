@@ -11,3 +11,5 @@ I add a backup plan as the app makes use with [Geolocation API](https://develope
 I also add a search function that allows the user to input a city name to get the weather. The city location info is also provided by [Geocoding API](https://openweathermap.org/api/geocoding-api) from OpenWeatherMap.
 
 The font is: [Poppins](https://fonts.google.com/specimen/Poppins#standard-styles) | Google Fonts.
+
+The background image: https://unsplash.com/photos/2T-3Jdo9ugU

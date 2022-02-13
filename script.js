@@ -6,6 +6,7 @@ const countryEl = document.getElementById('country');
 const weatherForecast = document.getElementById('weather-forecast');
 const currentTempEl = document.getElementById('current-temp');
 const cityInput = document.getElementById('searchBar');
+const placeContainer = document.getElementById('place-container');
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -126,6 +127,9 @@ const CityData = (() => {
       const {lat, lon} = await data[0];
       WeatherData.getData(lat, lon);
     } catch (err) {
+      const hintMsg = document.createElement('div');
+      hintMsg.textContent = '😅Oops, we have no info about the city';
+      placeContainer.appendChild(hintMsg);
       console.error(err);
     }
   }
