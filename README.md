@@ -1,5 +1,7 @@
 # Weather App
 
+[Live preview](https://allieschen.github.io/weather-app/)
+
 This web app is referred to [the tutorial](https://www.youtube.com/watch?v=6trGQWzg2AI) by Asish George Tech on Youtube.
 
 I add a backup plan as the app makes use with [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) which needs the user to agree to share the position of the device with the app.
