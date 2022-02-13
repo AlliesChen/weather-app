@@ -5,6 +5,7 @@ const timezone = document.getElementById('time-zone');
 const countryEl = document.getElementById('country');
 const weatherForecast = document.getElementById('weather-forecast');
 const currentTempEl = document.getElementById('current-temp');
+const cityInput = document.getElementById('searchBar');
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -27,7 +28,7 @@ window.addEventListener('load', () => {
 });
 
 
-const WeatherDate = (() => {
+const WeatherData = (() => {
   navigator.geolocation.getCurrentPosition((success) => {
     const { latitude, longitude } = success.coords;
     getData(latitude, longitude);
@@ -36,6 +37,10 @@ const WeatherDate = (() => {
     getData(25.0330, 121.5654);
   });
   function getData(lat, lon) {
+    // a loader animation to let user know they are running
+    currentWeatherItemsEl.innerHTML = '<div class="loader"></div>';
+    currentTempEl.innerHTML = '<div class="loader"></div>';
+    weatherForecast.innerHTML = '<div class="loader"></div>';
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`)
       .then(response => response.json())
       .then(data => {
@@ -53,6 +58,7 @@ const WeatherDate = (() => {
       const day = days[fullTime.getDay()].slice(0, 3);
       return {time, day};
     };
+
     timezone.innerHTML = data.timezone;
     countryEl.innerHTML = `${data.lat}N ${data.lon}E`;
     currentWeatherItemsEl.innerHTML =
@@ -101,8 +107,26 @@ const WeatherDate = (() => {
         `
       }
     });
-
     weatherForecast.innerHTML = otherDaysForecast;
   }
+  return {getData}
 })();
 
+const CityData = (() => {
+  cityInput.addEventListener('change', () => {
+    if (cityInput.value) {
+      const cityName = cityInput.value;
+      searchCityLoc(cityName);
+    }
+  });
+  async function searchCityLoc(city) {
+    try {
+      const res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
+      const data = await res.json();
+      const {lat, lon} = await data[0];
+      WeatherData.getData(lat, lon);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+})();
