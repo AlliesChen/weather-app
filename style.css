@@ -206,6 +206,10 @@ body{
         overflow: scroll;
     }
 
+    .future-forecast .today{
+        padding: 25px 15px;
+    }
+
     .future-forecast .today .temp{
         font-size: 22px;
     }
@@ -230,12 +234,25 @@ body{
     .place-container .time-zone{
         font-size: 20px;
     }
+
+    .place-container .search-input{
+        width: 8rem;
+    }
+    
+    .place-container .search-label{
+        right: 6rem;
+    }
+
     .current-info .others{
         padding: 12px;
     }
     
     .current-info .others .weather-item{
         font-size: 14px;
+    }
+
+    .hint-msg {
+        font-size: 10px;
     }
 }
 
@@ -244,5 +261,17 @@ body{
         justify-content: start;
         align-items: none;
         overflow: scroll;
+    }
+    
+    .place-container .time-zone{
+        font-size: 30px;
+    }
+    
+    .current-info .others .weather-item{
+        font-size: 18px;
+    }
+
+    .hint-msg {
+        font-size: 14px;
     }
 }

@@ -114,6 +114,7 @@ const WeatherData = (() => {
 })();
 
 const CityData = (() => {
+  const hintMsg = document.createElement('div');
   cityInput.addEventListener('change', () => {
     if (cityInput.value) {
       const cityName = cityInput.value;
@@ -126,9 +127,10 @@ const CityData = (() => {
       const data = await res.json();
       const {lat, lon} = await data[0];
       WeatherData.getData(lat, lon);
+      hintMsg.setAttribute('style', 'display: none');
     } catch (err) {
-      const hintMsg = document.createElement('div');
-      hintMsg.textContent = '😅Oops, we have no info about the city';
+      hintMsg.classList.add('hint-msg');
+      hintMsg.textContent = '😅cannot find the city';
       placeContainer.appendChild(hintMsg);
       console.error(err);
     }
